@@ -1,10 +1,9 @@
-name: Build and Deploy Backend project
+name: Build and Deploy Backend Project
 
 on:
   push:
     branches:
       - main
-      - fix/actions
     paths:
       - 'backend/**'
       - '.github/workflows/build_deploy-backend.yml'
