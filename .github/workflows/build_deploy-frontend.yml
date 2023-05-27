@@ -36,6 +36,10 @@ jobs:
     environment:
       name: 'Azure'
     steps:
+      - name: Verify path
+        run: |
+          ls
+          
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
