@@ -11,7 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import resultsJson from "../../assets/results.json";
 import "moment/locale/pt-br";
 import moment from "moment";
 import axios from "axios";
@@ -39,7 +38,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export const options = {
+
+const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -52,46 +52,45 @@ export const options = {
   },
 };
 
+// Função para ordenar os resultados por data
+const sortResultsByDate = (results: Result[]): Result[] => {
+  return results.sort((a, b) =>
+    moment(a.day).isBefore(moment(b.day)) ? -1 : 1
+  );
+};
+
+// Função para formatar os resultados em um formato adequado para o gráfico
+const formatResultsForChart = (results: Result[]): Data => {
+  const labels: string[] = [];
+  const datasets: number[][] = [[], []];
+
+  for (let result of results) {
+    if (!labels.includes(result.day)) {
+      labels.push(moment(result.day).format("DD-MM"));
+    }
+
+    const index = result.deviceId === 1 ? 0 : 1;
+    datasets[index].push(result.totalConsumption);
+  }
+
+  return { labels, datasets };
+};
+
+const fetchData = async (): Promise<Data> => {
+  const response = await axios.get<Result[]>(
+    "https://smartpowermeter-dev.azurewebsites.net/EnergyMeasurement"
+  );
+
+  const sortedResults = sortResultsByDate(response.data);
+  return formatResultsForChart(sortedResults);
+};
+
 export default function LineChart() {
   const [dados, setDados] = useState<Data>();
 
-  async function getDados() {
-    const response = await axios.get<Result[]>(
-      "https://smartpowermeter-dev.azurewebsites.net/EnergyMeasurement"
-    );
-    setDados(getFilteredDataset(response.data));
-  }
-
   useEffect(() => {
-    getDados();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchData().then((data) => setDados(data));
   }, []);
-
-  function getFilteredDataset(dataset: Result[]) {
-    const labels: string[] = [];
-    const datasets: number[][] = [[], []];
-
-    for (let data of dataset) {
-      if (labels.includes(data.day)) {
-        continue;
-      }
-      labels.push(moment(data.day).format("DD-MM"));
-
-      const otherIndex = data.deviceId === 1 ? 1 : 0;
-      const actualIndex = data.deviceId === 1 ? 0 : 1;
-
-      datasets[actualIndex].push(data.totalConsumption);
-      const consumiptionOther = resultsJson.find(
-        (x) => x.day === data.day && x.deviceId === otherIndex + 1
-      );
-
-      datasets[otherIndex].push(
-        consumiptionOther ? consumiptionOther.totalConsumption : 0
-      );
-    }
-
-    return { labels, datasets } as Data;
-  }
 
   return (
     <Line
