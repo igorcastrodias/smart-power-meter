@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPowerMeter.Domain", "SmartPowerMeter.Domain\SmartPowerMeter.Domain.csproj", "{BE965A04-B5DC-4704-B078-D1B0C8D68CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPowerMeter.Application", "SmartPowerMeter.Application\SmartPowerMeter.Application.csproj", "{BB9D709F-F2DC-4BE8-AA8B-9E3A7686C966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPowerMeter.Infrastructure", "SmartPowerMeter.Infrastructure\SmartPowerMeter.Infrastructure.csproj", "{66FA66F4-486D-4D0D-8491-4607C65B2885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPowerMeter.WebAPI", "SmartPowerMeter.WebAPI\SmartPowerMeter.WebAPI.csproj", "{40077DEA-473B-4BF0-9EDE-F7450F6EA1A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE965A04-B5DC-4704-B078-D1B0C8D68CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE965A04-B5DC-4704-B078-D1B0C8D68CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE965A04-B5DC-4704-B078-D1B0C8D68CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE965A04-B5DC-4704-B078-D1B0C8D68CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9D709F-F2DC-4BE8-AA8B-9E3A7686C966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9D709F-F2DC-4BE8-AA8B-9E3A7686C966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9D709F-F2DC-4BE8-AA8B-9E3A7686C966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9D709F-F2DC-4BE8-AA8B-9E3A7686C966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66FA66F4-486D-4D0D-8491-4607C65B2885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66FA66F4-486D-4D0D-8491-4607C65B2885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66FA66F4-486D-4D0D-8491-4607C65B2885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66FA66F4-486D-4D0D-8491-4607C65B2885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40077DEA-473B-4BF0-9EDE-F7450F6EA1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40077DEA-473B-4BF0-9EDE-F7450F6EA1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40077DEA-473B-4BF0-9EDE-F7450F6EA1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40077DEA-473B-4BF0-9EDE-F7450F6EA1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
