@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/build_deploy-frontend.yml'
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
     runs-on: 'ubuntu-latest'
     environment:
       name: 'Azure'  
@@ -25,13 +28,7 @@ jobs:
           cd frontend/smart-power-meter
           npm install
           npm run build
-          
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Azure'
-    steps:
+      
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -40,3 +37,5 @@ jobs:
           app_location: "/frontend/smart-power-meter/out"
           api_location: ""
           skip_app_build: true
+
+
