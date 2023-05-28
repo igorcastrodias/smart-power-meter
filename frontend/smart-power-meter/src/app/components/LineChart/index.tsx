@@ -55,7 +55,7 @@ const options = {
 // Função para ordenar os resultados por data
 const sortResultsByDate = (results: Result[]): Result[] => {
   return results.sort((a, b) =>
-    moment(a.day).isBefore(moment(b.day)) ? -1 : 1
+    moment(a.day).startOf('day').isBefore(moment(b.day).startOf('day')) ? -1 : 1
   );
 };
 
@@ -65,8 +65,8 @@ const formatResultsForChart = (results: Result[]): Data => {
   const datasets: number[][] = [[], []];
 
   for (let result of results) {
-    if (!labels.includes(result.day)) {
-      labels.push(moment(result.day).format("DD-MM"));
+    if (!labels.includes(moment(result.day).format("DD-MM-YYYY"))) {
+      labels.push(moment(result.day).format("DD-MM-YYYY"));
     }
 
     const index = result.deviceId === 1 ? 0 : 1;
