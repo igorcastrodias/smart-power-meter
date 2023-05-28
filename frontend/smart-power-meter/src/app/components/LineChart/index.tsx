@@ -52,25 +52,30 @@ const options = {
   },
 };
 
-// Função para ordenar os resultados por data
-const sortResultsByDate = (results: Result[]): Result[] => {
-  return results.sort((a, b) =>
-    moment(a.day).startOf('day').isBefore(moment(b.day).startOf('day')) ? -1 : 1
-  );
-};
-
 // Função para formatar os resultados em um formato adequado para o gráfico
 const formatResultsForChart = (results: Result[]): Data => {
   const labels: string[] = [];
   const datasets: number[][] = [[], []];
-
+  
+  // Crie um mapa com o total de consumo para cada dia e dispositivo
+  const consumptionMap: { [key: string]: number[] } = {};
   for (let result of results) {
-    if (!labels.includes(moment(result.day).format("DD-MM-YYYY"))) {
-      labels.push(moment(result.day).format("DD-MM-YYYY"));
+    const date = moment(result.day).format("DD-MM-YYYY");
+    if (!consumptionMap[date]) {
+      consumptionMap[date] = [0, 0];
     }
-
     const index = result.deviceId === 1 ? 0 : 1;
-    datasets[index].push(result.totalConsumption);
+    consumptionMap[date][index] = result.totalConsumption;
+  }
+
+  // Gere as datas dos últimos 30 dias
+  const today = moment();
+  for (let i = 0; i < 30; i++) {
+    const date = moment(today).subtract(i, 'days').format("DD-MM-YYYY");
+    labels.unshift(date); // Insira as datas em ordem reversa para obter uma ordem ascendente
+    const consumption = consumptionMap[date] || [0, 0]; // Use o consumo do mapa, ou [0, 0] se não houver dados para essa data
+    datasets[0].unshift(consumption[0]); // Insira os valores de consumo na frente do array para corresponder à ordem das datas
+    datasets[1].unshift(consumption[1]);
   }
 
   return { labels, datasets };
