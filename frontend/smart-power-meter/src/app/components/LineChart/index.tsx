@@ -52,6 +52,13 @@ const options = {
   },
 };
 
+// Função para ordenar os resultados por data
+const sortResultsByDate = (results: Result[]): Result[] => {
+  return results.sort((a, b) =>
+    moment(a.day).startOf('day').isBefore(moment(b.day).startOf('day')) ? -1 : 1
+  );
+};
+
 // Função para formatar os resultados em um formato adequado para o gráfico
 const formatResultsForChart = (results: Result[]): Data => {
   const labels: string[] = [];
