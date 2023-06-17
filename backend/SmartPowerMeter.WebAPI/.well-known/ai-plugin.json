@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Smart Power Meter Plugin",
+    "name_for_model": "smartpowermeter",
+    "description_for_human": "Plugin to get current energy consumption information for a given device in the last 30 days.",
+    "description_for_model": "Plugin to get current energy consumption information for a given device in the last 30 days.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "http://localhost:5285/swagger/v1/swagger.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "http://localhost:5285/.well-known/logo.png",
+    "contact_email": "support@example.com",
+    "legal_info_url": "http://www.example.com/legal"
+  }

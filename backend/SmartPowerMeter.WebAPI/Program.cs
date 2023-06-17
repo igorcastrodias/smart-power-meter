@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using SmartPowerMeter.Application;
 using SmartPowerMeter.Infrastructure;
 using System.Data;
@@ -23,7 +24,18 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseSwaggerUI(x=>
+    {
+        x.SwaggerEndpoint("/swagger/v1/swagger.yaml", "Smart Power Meter v1");
+       
+    });
 }
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), ".well-known")),
+    RequestPath = "/.well-known"
+});
 
 app.UseCors(x =>
 {
